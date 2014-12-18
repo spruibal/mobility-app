@@ -22,6 +22,7 @@ var MapsLib = {
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be deprecated soon
   fusionTableId:      "1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ", //Point data layer
+  // https://www.google.com/fusiontables/DataSource?docid=1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ   Final Point Data Table
 
   polygon1TableID:    "1ulLjrVynDtTiIypTFK333HmC7xvJmm707rgMSgyD", //Census 2000 tracts with Opportunity report 2009 scores
   // IMPORTANT to be sure that we are displaying the correct polygon layer. Compare with:
