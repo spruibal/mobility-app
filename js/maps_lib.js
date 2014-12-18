@@ -93,11 +93,11 @@ var MapsLib = {
     var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "") $("#search_radius").val(loadRadius);
     else $("#search_radius").val(MapsLib.searchRadius);
-    // $(":checkbox").prop("checked", "checked"); // if active, turns on all checkboxes by default
     $("#result_box").hide();
 
     //-----custom initializers-------
       $("#rbPolygon1").attr("checked", "checked");
+    // $(":checkbox").prop("checked", "checked"); // if active, turns on all checkboxes by default
     
     //-----end of custom initializers-------
 
