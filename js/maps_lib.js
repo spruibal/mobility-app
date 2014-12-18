@@ -103,7 +103,7 @@ var MapsLib = {
 
    //-----custom initializers -- default setting to display Polygon1 layer
     
-    // $("#rbPolygon1").attr("checked", "checked"); 
+    $("#rbPolygon1").attr("checked", "checked"); 
 
     //-----end of custom initializers-------
 
