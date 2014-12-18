@@ -97,7 +97,6 @@ var MapsLib = {
 
     //-----custom initializers-------
       $("#rbPolygon1").attr("checked", "checked");
-    // $(":checkbox").prop("checked", "checked"); // if active, turns on all checkboxes by default
     $(":checkbox").attr("autocomplete", "off");   //all checkboxes off by default
     
     //-----end of custom initializers-------
