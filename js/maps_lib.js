@@ -37,7 +37,7 @@ var MapsLib = {
   //NOTE: if your location column name has spaces in it, surround it with single quotes
   //example: locationColumn:     "'my location'",
   //if your Fusion Table has two-column lat/lng data, see https://support.google.com/fusiontables/answer/175922
-  locationColumn:     "Lat",  // must be capitalized "Lat" to match this specific point data table
+  locationColumn:     "Lat",  // in this point data table, must be capitalized "Lat"
 
   map_centroid:       new google.maps.LatLng(41.613817,-72.723780), //center that your map defaults to
   locationScope:      "connecticut",      //geographical area appended to all address searches
@@ -61,8 +61,8 @@ var MapsLib = {
       styles: [
         {
           stylers: [
-            { saturation: -100 }, // MODIFY Saturation and Lightness if needed
-            { lightness: 40 }     // Current values make thematic polygon shading stand out over base map
+            { saturation: -100 }, // MODIFY Saturation and Lightness of Google base map if needed
+            { lightness: 40 }     // Current values make thematic polygon shading stand out over base map; also adjust opacity in Google Fusion Table map
           ]
         }
       ]
@@ -98,7 +98,7 @@ var MapsLib = {
     var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "") $("#search_radius").val(loadRadius);
     else $("#search_radius").val(MapsLib.searchRadius);
-    $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
+    // $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
     $("#result_box").hide();
 
    //-----custom initializers -- default setting to display Polygon1 layer
