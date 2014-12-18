@@ -39,7 +39,7 @@ var MapsLib = {
   //if your Fusion Table has two-column lat/lng data, see https://support.google.com/fusiontables/answer/175922
   locationColumn:     "Lat",  // in this point data table, must be capitalized "Lat"
 
-  map_centroid:       new google.maps.LatLng(41.6,-72.7), //center that your map defaults to
+  map_centroid:       new google.maps.LatLng(41.5,-72.7), //center that your map defaults to
   locationScope:      "connecticut",      //geographical area appended to all address searches
   recordName:         "result",       //for showing number of results
   recordNamePlural:   "results",
