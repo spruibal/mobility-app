@@ -22,8 +22,12 @@ var MapsLib = {
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be deprecated soon
   fusionTableId:      "1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ", //Point data layer
+  // https://www.google.com/fusiontables/DataSource?docid=1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ   Final Point Data Table
 
   polygon1TableID:    "1ulLjrVynDtTiIypTFK333HmC7xvJmm707rgMSgyD", //Census 2000 tracts with Opportunity report 2009 scores
+  // IMPORTANT to be sure that we are displaying the correct polygon layer. Compare with:
+  // https://www.google.com/fusiontables/DataSource?docid=1ulLjrVynDtTiIypTFK333HmC7xvJmm707rgMSgyD  Merge of 2010 CT Census Tracts for Mobility Map and oppdata
+  // https://www.google.com/fusiontables/DataSource?docid=1USNX8O7rNhgTRY6EvrXQsXRFR2b0m_E9nsC_EXDo  Currently in use
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -32,9 +36,10 @@ var MapsLib = {
   //name of the location column in your Fusion Table.
   //NOTE: if your location column name has spaces in it, surround it with single quotes
   //example: locationColumn:     "'my location'",
-  locationColumn:     "geometry",
+  //if your Fusion Table has two-column lat/lng data, see https://support.google.com/fusiontables/answer/175922
+  locationColumn:     "Lat",  // in this point data table, must be capitalized "Lat"
 
-  map_centroid:       new google.maps.LatLng(41.613817,-72.723780), //center that your map defaults to
+  map_centroid:       new google.maps.LatLng(41.5,-72.7), //center that your map defaults to
   locationScope:      "connecticut",      //geographical area appended to all address searches
   recordName:         "result",       //for showing number of results
   recordNamePlural:   "results",
@@ -56,8 +61,8 @@ var MapsLib = {
       styles: [
         {
           stylers: [
-            { saturation: -100 }, // MODIFY Saturation and Lightness if needed
-            { lightness: 40 }     // Current values make thematic polygon shading stand out over base map
+            { saturation: -100 }, // MODIFY Saturation and Lightness of Google base map if needed
+            { lightness: 40 }     // Current values make thematic polygon shading stand out over base map; also adjust opacity in Google Fusion Table map
           ]
         }
       ]
@@ -75,7 +80,7 @@ var MapsLib = {
 
     MapsLib.searchrecords = null;
 
-    //MODIFY to match 5-bucket GFT values of pre-checked polygon1  - see also further below
+    //MODIFY to match 5-bucket GFT values of pre-checked polygon1  - insert again further below - numbers are placeholders
     MapsLib.setDemographicsLabels("0&ndash;20%", "20&ndash;40%", "40&ndash;60%", "60&ndash;80%", "80&ndash;100%");
 
     // MODIFY if needed: defines background polygon1 and polygon2 layers
@@ -93,7 +98,7 @@ var MapsLib = {
     var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "") $("#search_radius").val(loadRadius);
     else $("#search_radius").val(MapsLib.searchRadius);
-    //$(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
+    // $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
     $("#result_box").hide();
 
    //-----custom initializers -- default setting to display Polygon1 layer

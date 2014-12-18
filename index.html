@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Mobility App</title>
+    <title>Mobility App</title><!--MODIFY title if desired-->
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content='' name='description' />
@@ -23,11 +23,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href='index.html'>Mobility App by CT Open Communities Alliance</a>
+          <a class='navbar-brand' href='index.html'>Mobility App by CT Open Communities Alliance</a><!--MODIFY title if desired-->
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class='active'><img src="images/ctoca-logo.png" alt="logo" height="50" width="375"></li>
+            <li class='active'><img src="images/ctoca-logo.png" alt="logo" height="50" width="375"></li> <!--MODIFY logo if desired-->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -35,7 +35,7 @@
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-4'>
-          <p>Enter an apartment or home address to find areas of higher opportunity and neighborhood assets.</p>
+          <p>Enter an apartment or home address to find areas of higher opportunity and neighborhood assets.</p><!--MODIFY text if desired-->
           <div class='well'>
             <h4>
               Address <small>(<a id='find_me' href='#'>find me</a>)</small>
@@ -46,18 +46,27 @@
             <p>
               <label>
                 within
-                <select id='search_radius'>
-                  <option value='400'>2 blocks</option>
+                <select id='search_radius'><!--MODIFY search radius displays if desired; values in meters; see maps_lib.js-->
                   <option value='805'>1/2 mile</option>
-                  <option value='1610'>1 mile</option>
                   <option value='3220'>2 miles</option>
+                  <option value='8050'>5 miles</option>
+                  <option value='16100'>10 miles</option>
+                  
                 </select>
               </label>
             </p>
+            <a class='btn btn-primary' id='search' href='#'>
+              <i class='glyphicon glyphicon-search'></i>
+              Search
+            </a>
+            <a class='btn btn-default' id='reset' href='#'>
+              <i class='glyphicon glyphicon-repeat'></i>
+              Reset
+            </a>
             <!--MODIFY Polygon layers legend heading, labels (such as Polygon layer 1) to match your data, and related items in maps_lib.js file -->
             <h4>Opportunity Index</h4>
             <ul class='inputs-list unstyled'>
-              <ol id='polygon-legend'>
+              <ol id='polygon-legend'><!--MODIFY dynamic legend size and color in custom.css; labels in maps_lib.js -->
                 <li id='legend-one'></li>
                 <li id='legend-two'></li>
                 <li id='legend-three'></li>
@@ -67,19 +76,18 @@
               <div class='clear'></div>
               <li>
                 <label class='radio inline'>
-                  <input type='radio' name='types' class='hidden' id='rbPolygon1' checked /><!--MODIFY to remove hidden and default checked button-->
+                  <input type='radio' name='types' class='hidden' id='rbPolygon1'/><!--MODIFY to remove hidden class to show one or more-->
                 </label>
               </li>
             </ul>
-            <br />
-            <!--MODIFY Point layer legend heading, labels (such as Interdistrict), and colors (green, blue, yellow, red, purple) to match your data -->
+            <!--MODIFY Point layer legend heading, labels, and colors (green, blue, yellow, red, purple) to match Google Fusion Table and maps_lib.js -->
             <h4>
               Neighborhood assets
             </h4>
             <ul class='inputs-list unstyled'>
               <li>
                 <label class='checkbox inline'>
-                  <input type='checkbox' id='cbType1' checked/>
+                  <input type='checkbox' id='cbType1'/>
                   <span class='filter-box filter-green'></span>
                   Places of Worship <!--This label can be modified from actual data entry ("Interdistrict") -->
                 </label>
@@ -106,15 +114,6 @@
                 </label>
               </li>
             </ul>
-            <br />
-            <a class='btn btn-primary' id='search' href='#'>
-              <i class='glyphicon glyphicon-search'></i>
-              Search
-            </a>
-            <a class='btn btn-default' id='reset' href='#'>
-              <i class='glyphicon glyphicon-repeat'></i>
-              Reset
-            </a>
           </div>
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
         </div>
