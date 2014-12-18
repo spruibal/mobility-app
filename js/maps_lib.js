@@ -34,14 +34,14 @@ var MapsLib = {
   //example: locationColumn:     "'my location'",
   locationColumn:     "geometry",
 
-  map_centroid:       new google.maps.LatLng(41.7682,-72.684), //center that your map defaults to
+  map_centroid:       new google.maps.LatLng(41.613817,-72.723780), //center that your map defaults to
   locationScope:      "connecticut",      //geographical area appended to all address searches
   recordName:         "result",       //for showing number of results
   recordNamePlural:   "results",
 
 
   searchRadius:       805,            //in meters ~ 1/2 mile
-  defaultZoom:        12,             //zoom level when map is loaded (bigger is more zoomed in)
+  defaultZoom:        9,             //zoom level when map is loaded (bigger is more zoomed in)
   addrMarkerImage:    'images/blue-pushpin.png', // set to empty '' to hide searched address marker
   currentPinpoint:    null,
 
@@ -93,11 +93,13 @@ var MapsLib = {
     var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "") $("#search_radius").val(loadRadius);
     else $("#search_radius").val(MapsLib.searchRadius);
-    // $(":checkbox").prop("checked", "checked");  //checkboxes on by default
+    //$(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
     $("#result_box").hide();
 
-    //-----custom initializers-------
-      $("#rbPolygon1").attr("checked", "checked");
+   //-----custom initializers -- default setting to display Polygon1 layer
+    
+    $("#rbPolygon1").attr("checked", "checked"); 
+
     //-----end of custom initializers-------
 
     //run the default search
@@ -118,8 +120,16 @@ var MapsLib = {
 
     var whereClause = MapsLib.locationColumn + " not equal to ''";
 
-    //-----custom filters-------
-
+//-----custom filters for point data layer
+  
+    //-- NUMERICAL OPTION - to display and filter a column of numerical data in your Google Fusion Table
+        var type_column = "'TypeNum'";
+    var searchType = type_column + " IN (-1,";
+    if ( $("#cbType1").is(':checked')) searchType += "1,";
+    if ( $("#cbType2").is(':checked')) searchType += "2,";
+    if ( $("#cbType3").is(':checked')) searchType += "3,";
+    if ( $("#cbType4").is(':checked')) searchType += "4,";
+    whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
     //-------end of custom filters--------
 
     if (address != "") {
