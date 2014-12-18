@@ -1,6 +1,6 @@
 mobility-app
 ============
-Designed with Connecticut Open Communities Alliance (http://ctoca.org) to increase housing mobility client moves to higher-opportunity areas
+Designed with Connecticut Open Communities Alliance (http://ctoca.org) to increase housing mobility to higher-opportunity areas
 
 Based on Searchable Map Template by @derekeder
 
