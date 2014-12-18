@@ -95,7 +95,7 @@ var MapsLib = {
     else $("#search_radius").val(MapsLib.searchRadius);
     // $(":checkbox").prop("checked", "checked");  //checkboxes on by default
     //checkboxes off by default
-    //$(":checkbox").prop("autocomplete", "off); 
+    // $(":checkbox").prop("autocomplete", "off); 
     $("#result_box").hide();
 
     //-----custom initializers-------
