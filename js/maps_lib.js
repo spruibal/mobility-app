@@ -25,9 +25,7 @@ var MapsLib = {
   // https://www.google.com/fusiontables/DataSource?docid=1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ   Final Point Data Table
 
   polygon1TableID:    "1ulLjrVynDtTiIypTFK333HmC7xvJmm707rgMSgyD", //Census 2000 tracts with Opportunity report 2009 scores
-  // IMPORTANT to be sure that we are displaying the correct polygon layer. Compare with:
   // https://www.google.com/fusiontables/DataSource?docid=1ulLjrVynDtTiIypTFK333HmC7xvJmm707rgMSgyD  Merge of 2010 CT Census Tracts for Mobility Map and oppdata
-  // https://www.google.com/fusiontables/DataSource?docid=1USNX8O7rNhgTRY6EvrXQsXRFR2b0m_E9nsC_EXDo  Currently in use
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -80,8 +78,8 @@ var MapsLib = {
 
     MapsLib.searchrecords = null;
 
-    //MODIFY to match 5-bucket GFT values of pre-checked polygon1  - insert again further below - numbers are placeholders
-    MapsLib.setDemographicsLabels("0&ndash;20%", "20&ndash;40%", "40&ndash;60%", "60&ndash;80%", "80&ndash;100%");
+    //MODIFY to match 5-bucket GFT values of pre-checked polygon1  - insert again further below 
+    MapsLib.setDemographicsLabels("very low", "low", "moderate", "high", "very high");
 
     // MODIFY if needed: defines background polygon1 and polygon2 layers
     MapsLib.polygon1 = new google.maps.FusionTablesLayer({
@@ -117,7 +115,7 @@ var MapsLib = {
     // MODIFY if needed: shows background polygon layer depending on which checkbox is selected
     if ($("#rbPolygon1").is(':checked')) {
       MapsLib.polygon1.setMap(map);
-      MapsLib.setDemographicsLabels("0&ndash;20%", "20&ndash;40%", "40&ndash;60%", "60&ndash;80%", "80&ndash;100%"); //MODIFY to match 3 buckets in GFT
+      // MapsLib.setDemographicsLabels("very low", "low", "moderate", "high", "very high"); //Not needed because polygon layer is never turned off
     }
 
     var address = $("#search_address").val();
