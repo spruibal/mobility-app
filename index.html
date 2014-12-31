@@ -43,18 +43,6 @@
             <p>
               <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
             </p>
-            <p>
-              <label>
-                within
-                <select id='search_radius'><!--MODIFY search radius displays if desired; values in meters; see maps_lib.js-->
-                  <option value='805'>1/2 mile</option>
-                  <option value='3220'>2 miles</option>
-                  <option value='8050'>5 miles</option>
-                  <option value='16100'>10 miles</option>
-                  
-                </select>
-              </label>
-            </p>
             <a class='btn btn-primary' id='search' href='#'>
               <i class='glyphicon glyphicon-search'></i>
               Search
@@ -84,6 +72,17 @@
             <h4>
               Neighborhood assets
             </h4>
+            <p>
+              <label>
+                within
+                <select id='search_radius'><!--MODIFY search radius displays if desired; values in meters; see maps_lib.js-->
+                  <option value='805'>1/2 mile</option>
+                  <option value='3220'>2 miles</option>
+                  <option value='8050'>5 miles</option>
+                  <option value='16100'>10 miles</option>
+                </select>
+              </label>
+            </p>
             <ul class='inputs-list unstyled'>
               <li>
                 <label class='checkbox inline'>
