@@ -35,25 +35,19 @@
     <div class='container-fluid'>
       <div class='row'>
         <div class='col-md-4'>
-          <p>Enter an apartment or home address to find areas of higher opportunity and neighborhood assets.</p><!--MODIFY text if desired-->
+          <p><b>2-address MOCKUP </b>Enter an apartment or home address to find areas of higher opportunity and neighborhood assets.</p><!--MODIFY text if desired-->
           <div class='well'>
             <h4>
-              Address <small>(<a id='find_me' href='#'>find me</a>)</small>
+              New home address <small>(<a id='find_me' href='#'>find me</a>)</small>
             </h4>
             <p>
               <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
             </p>
+            <h5>
+              Optional: transportation to second address</br> <small>(<a id='find_me2' href='#'>find me</a>)</small>
+            </h5>
             <p>
-              <label>
-                within
-                <select id='search_radius'><!--MODIFY search radius displays if desired; values in meters; see maps_lib.js-->
-                  <option value='805'>1/2 mile</option>
-                  <option value='3220'>2 miles</option>
-                  <option value='8050'>5 miles</option>
-                  <option value='16100'>10 miles</option>
-                  
-                </select>
-              </label>
+              <input class='form-control' id='search_address2' placeholder='Enter address of work, school, family, etc.' type='text' />
             </p>
             <a class='btn btn-primary' id='search' href='#'>
               <i class='glyphicon glyphicon-search'></i>
@@ -84,6 +78,17 @@
             <h4>
               Neighborhood assets
             </h4>
+            <p>
+              <label>
+                within
+                <select id='search_radius'><!--MODIFY search radius displays if desired; values in meters; see maps_lib.js-->
+                  <option value='805'>1/2 mile</option>
+                  <option value='3220'>2 miles</option>
+                  <option value='8050'>5 miles</option>
+                  <option value='16100'>10 miles</option>
+                </select>
+              </label>
+            </p>
             <ul class='inputs-list unstyled'>
               <li>
                 <label class='checkbox inline'>
