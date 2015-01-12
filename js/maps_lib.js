@@ -37,7 +37,6 @@ var MapsLib = {
   locationColumn:     "Lat",  // in this point data table, must be capitalized "Lat"
 
   map_centroid:       new google.maps.LatLng(41.5,-72.7), //center that your map defaults to
-  locationScope:      "connecticut",      //geographical area appended to all address searches
   recordName:         "result",       //for showing number of results
   recordNamePlural:   "results",
 
@@ -135,8 +134,6 @@ var MapsLib = {
     //-------end of custom filters--------
 
     if (address != "") {
-      if (address.toLowerCase().indexOf(MapsLib.locationScope) == -1)
-        address = address + " " + MapsLib.locationScope;
 
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -169,6 +166,20 @@ var MapsLib = {
               animation: google.maps.Animation.DROP,
               title:address
             });
+
+            // populate the info window with the searched address and a link to directions
+            MapsLib.addrInfoWindow = new google.maps.InfoWindow({
+                content: "<div style='height: 60px'>" + address + "<br /><a href='https://maps.google.com/maps?f=d&hl=en&geocode=&daddr=" + address.replace(/ /g, '+') + "' target='_blank'>Get directions &raquo;</a></div>"
+            });
+
+            // set click listener
+            google.maps.event.addListener(MapsLib.addrMarker, 'click', function() {
+              MapsLib.addrInfoWindow.open(map,MapsLib.addrMarker);
+            });
+
+            // open by default
+            MapsLib.addrInfoWindow.open(map,MapsLib.addrMarker);
+
           }
 
           whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
