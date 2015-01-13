@@ -37,7 +37,6 @@ var MapsLib = {
   locationColumn:     "Lat",  // in this point data table, must be capitalized "Lat"
 
   map_centroid:       new google.maps.LatLng(41.5,-72.7), //center that your map defaults to
-  locationScope:      "connecticut",      //geographical area appended to all address searches
   recordName:         "result",       //for showing number of results
   recordNamePlural:   "results",
 
@@ -90,32 +89,28 @@ var MapsLib = {
       templateId: 2
     });
 
+    MapsLib.polygon1.setMap(map);
+
     //reset filters
     $("#search_address").val(MapsLib.convertToPlainString($.address.parameter('address')));
     var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "") $("#search_radius").val(loadRadius);
     else $("#search_radius").val(MapsLib.searchRadius);
-    // $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
+    $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
     $("#result_box").hide();
 
    //-----custom initializers -- default setting to display Polygon1 layer
-    
-    $("#rbPolygon1").attr("checked", "checked"); 
-
     //-----end of custom initializers-------
 
-    //run the default search
-    MapsLib.doSearch();
+    //run the default search if someone entered an address
+
+    var address = $("#search_address").val();
+    if (address != "")
+      MapsLib.doSearch();
   },
 
   doSearch: function(location) {
     MapsLib.clearSearch();
-
-    // MODIFY if needed: shows background polygon layer depending on which checkbox is selected
-    if ($("#rbPolygon1").is(':checked')) {
-      MapsLib.polygon1.setMap(map);
-      // MapsLib.setDemographicsLabels("very low", "low", "moderate", "high", "very high"); //Not needed because polygon layer is never turned off
-    }
 
     var address = $("#search_address").val();
     MapsLib.searchRadius = $("#search_radius").val();
@@ -125,7 +120,7 @@ var MapsLib = {
 //-----custom filters for point data layer
   
     //-- NUMERICAL OPTION - to display and filter a column of numerical data in your Google Fusion Table
-        var type_column = "'TypeNum'";
+    var type_column = "'TypeNum'";
     var searchType = type_column + " IN (-1,";
     if ( $("#cbType1").is(':checked')) searchType += "1,";
     if ( $("#cbType2").is(':checked')) searchType += "2,";
@@ -135,8 +130,6 @@ var MapsLib = {
     //-------end of custom filters--------
 
     if (address != "") {
-      if (address.toLowerCase().indexOf(MapsLib.locationScope) == -1)
-        address = address + " " + MapsLib.locationScope;
 
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -169,6 +162,20 @@ var MapsLib = {
               animation: google.maps.Animation.DROP,
               title:address
             });
+
+            // populate the info window with the searched address and a link to directions
+            MapsLib.addrInfoWindow = new google.maps.InfoWindow({
+                content: "<div style='height: 60px'>" + address + "<br /><a href='https://maps.google.com/maps?f=d&hl=en&geocode=&daddr=" + address.replace(/ /g, '+') + "' target='_blank'>Get directions &raquo;</a></div>"
+            });
+
+            // set click listener
+            google.maps.event.addListener(MapsLib.addrMarker, 'click', function() {
+              MapsLib.addrInfoWindow.open(map,MapsLib.addrMarker);
+            });
+
+            // open by default
+            MapsLib.addrInfoWindow.open(map,MapsLib.addrMarker);
+
           }
 
           whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
@@ -209,8 +216,6 @@ var MapsLib = {
   clearSearch: function() {
     if (MapsLib.searchrecords != null)
       MapsLib.searchrecords.setMap(null);
-    if (MapsLib.polygon1 != null)
-      MapsLib.polygon1.setMap(null);
     if (MapsLib.addrMarker != null)
       MapsLib.addrMarker.setMap(null);
     if (MapsLib.searchRadiusCircle != null)
