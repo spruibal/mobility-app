@@ -21,10 +21,11 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be deprecated soon
-  fusionTableId:      "1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ", //Point data layer
-  // https://www.google.com/fusiontables/DataSource?docid=1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ   Final Point Data Table
+  fusionTableId:      "1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ", //Mobility App Neighborhood Assets point layer
+  // https://www.google.com/fusiontables/DataSource?docid=1qk9z46VakTMrA7zLpt8y4SfQos3FGsWhRTrww1yZ  
 
-  polygon1TableID:    "1VeRnEThojzHXw2PSiKJtIr_dPPqd9huEopV6NrQi", //Opportunity-index-values-2014 with Census 2010 tracts
+  polygon1TableID:    "1VeRnEThojzHXw2PSiKJtIr_dPPqd9huEopV6NrQi", //Opportunity-index-values-2014 with Census 2010 tracts polygons
+  // https://www.google.com/fusiontables/DataSource?docid=1VeRnEThojzHXw2PSiKJtIr_dPPqd9huEopV6NrQi
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
