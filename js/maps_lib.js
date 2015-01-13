@@ -89,32 +89,28 @@ var MapsLib = {
       templateId: 2
     });
 
+    MapsLib.polygon1.setMap(map);
+
     //reset filters
     $("#search_address").val(MapsLib.convertToPlainString($.address.parameter('address')));
     var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
     if (loadRadius != "") $("#search_radius").val(loadRadius);
     else $("#search_radius").val(MapsLib.searchRadius);
-    // $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
+    $(":checkbox").prop("checked", "checked");   //if active, all checkboxes on by default
     $("#result_box").hide();
 
    //-----custom initializers -- default setting to display Polygon1 layer
-    
-    $("#rbPolygon1").attr("checked", "checked"); 
-
     //-----end of custom initializers-------
 
-    //run the default search
-    MapsLib.doSearch();
+    //run the default search if someone entered an address
+
+    var address = $("#search_address").val();
+    if (address != "")
+      MapsLib.doSearch();
   },
 
   doSearch: function(location) {
     MapsLib.clearSearch();
-
-    // MODIFY if needed: shows background polygon layer depending on which checkbox is selected
-    if ($("#rbPolygon1").is(':checked')) {
-      MapsLib.polygon1.setMap(map);
-      // MapsLib.setDemographicsLabels("very low", "low", "moderate", "high", "very high"); //Not needed because polygon layer is never turned off
-    }
 
     var address = $("#search_address").val();
     MapsLib.searchRadius = $("#search_radius").val();
@@ -124,13 +120,13 @@ var MapsLib = {
 //-----custom filters for point data layer
   
     //-- NUMERICAL OPTION - to display and filter a column of numerical data in your Google Fusion Table
-    //     var type_column = "'TypeNum'";
-    // var searchType = type_column + " IN (-1,";
-    // if ( $("#cbType1").is(':checked')) searchType += "1,";
-    // if ( $("#cbType2").is(':checked')) searchType += "2,";
-    // if ( $("#cbType3").is(':checked')) searchType += "3,";
-    // if ( $("#cbType4").is(':checked')) searchType += "4,";
-    // whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
+    var type_column = "'TypeNum'";
+    var searchType = type_column + " IN (-1,";
+    if ( $("#cbType1").is(':checked')) searchType += "1,";
+    if ( $("#cbType2").is(':checked')) searchType += "2,";
+    if ( $("#cbType3").is(':checked')) searchType += "3,";
+    if ( $("#cbType4").is(':checked')) searchType += "4,";
+    whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
     //-------end of custom filters--------
 
     if (address != "") {
@@ -220,8 +216,6 @@ var MapsLib = {
   clearSearch: function() {
     if (MapsLib.searchrecords != null)
       MapsLib.searchrecords.setMap(null);
-    if (MapsLib.polygon1 != null)
-      MapsLib.polygon1.setMap(null);
     if (MapsLib.addrMarker != null)
       MapsLib.addrMarker.setMap(null);
     if (MapsLib.searchRadiusCircle != null)
